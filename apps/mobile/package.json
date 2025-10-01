@@ -1,0 +1,17 @@
+{
+  "name": "lyra-mobile",
+  "private": true,
+  "main": "expo-entry.js",
+  "scripts": { "start": "expo start", "android": "expo run:android", "ios": "expo run:ios" },
+  "dependencies": {
+    "expo": "~51.0.15",
+    "expo-av": "~14.0.6",
+    "expo-blur": "~13.0.2",
+    "expo-haptics": "~13.0.1",
+    "expo-router": "~3.5.18",
+    "react": "18.2.0",
+    "react-native": "0.74.3",
+    "react-native-gesture-handler": "^2.16.1",
+    "react-native-reanimated": "^3.10.0"
+  }
+}

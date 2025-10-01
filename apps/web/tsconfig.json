@@ -1,0 +1,1 @@
+{"compilerOptions":{"jsx":"react-jsx","module":"esnext","target":"es2020","baseUrl":"."},"include":["src"]}
