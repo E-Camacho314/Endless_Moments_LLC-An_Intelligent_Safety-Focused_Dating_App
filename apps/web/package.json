@@ -1,0 +1,21 @@
+{
+  "name": "lyra-web",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "lottie-web": "5.12.2",
+    "next": "14.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "recharts": "2.12.7"
+  },
+  "devDependencies": {
+    "@types/node": "24.8.1",
+    "@types/react": "19.2.2",
+    "typescript": "5.9.3"
+  }
+}

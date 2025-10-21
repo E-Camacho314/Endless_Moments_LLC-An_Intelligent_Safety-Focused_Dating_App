@@ -1,0 +1,5 @@
+{
+  "/chat/page": "app/chat/page.js",
+  "/page": "app/page.js",
+  "/api/backend/route": "app/api/backend/route.js"
+}
