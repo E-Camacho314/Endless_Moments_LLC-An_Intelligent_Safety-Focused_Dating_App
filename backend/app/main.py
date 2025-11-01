@@ -17,6 +17,8 @@ from .features.events import router as events_router
 from .features.verify_id import router as verify_router
 from .features.payments import router as payments_router
 from .features import feed
+from .routers import verification
+
 
 app = FastAPI(title="Lyra API")
 Base.metadata.create_all(bind=engine)
@@ -39,3 +41,4 @@ app.include_router(events_router)
 app.include_router(verify_router)
 app.include_router(payments_router)
 app.include_router(feed.router)
+app.include_router(verification.router)
