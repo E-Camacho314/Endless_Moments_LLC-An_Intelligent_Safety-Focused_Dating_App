@@ -16,10 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="bg-black text-white">
       <body className="min-h-screen">
         {/* ✅ Global Nav */}
-        <NavBar />
+        <NavBar /> 
 
         {/* ✅ Page container */}
-        <main className="mx-auto max-w-6xl px-4 py-6">
+        <main className="mx-auto max-w-6xl px-4 py-6 pt-24">
           {/* <RouteTransition>{children}</RouteTransition> */}
           {children}
         </main>

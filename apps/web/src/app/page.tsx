@@ -3,57 +3,104 @@
 import Link from 'next/link';
 
 export default function Home() {
+  const gradientText = {
+    background: 'linear-gradient(90deg, #936d14, #ffffff)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+  };
+
   return (
-    <div className="min-h-screen bg-[#0B0D12] text-white">
-      {/* Hero Section */}
-      <main className="mx-auto max-w-5xl px-4 py-24 text-center">
-        <h1 className="text-4xl sm:text-6xl font-semibold tracking-tight mb-6">
-          Welcome to <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-500">Lyra</span>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '0px',
+        color: '#f0f4f8',
+        textAlign: 'center',
+        background: 'linear-gradient(to bottom right, #0b0c2a, #1a1a4f, #3b2f7f)',
+      }}
+    >
+
+      <div style={{ width: '100%', position: 'relative' }}>
+        <img
+          src="/pexels-josh-hild-1270765-4606770.jpg"
+          alt="Night sky"
+          style={{
+            width: '100%',
+            display: 'block',
+            height: 'auto',
+            maskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+            WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)',
+            maskRepeat: 'no-repeat',
+            maskSize: 'cover',
+            WebkitMaskRepeat: 'no-repeat',
+            WebkitMaskSize: 'cover',
+          }}
+        />
+      </div>
+
+      <main style={{ maxWidth: '1200px', width: '100%' }}>
+        <h1 style={{ fontSize: '3rem', fontWeight: 600, marginBottom: '1.5rem', lineHeight: 1.2 }}>
+          Welcome to{' '}
+          <span style={gradientText}>Lyra</span>
         </h1>
-        <p className="text-white/70 text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+
+        <p style={{ color: 'rgba(240,244,248,0.8)', fontSize: '1.125rem', maxWidth: '600px', margin: '0 auto 2.5rem', lineHeight: 1.6 }}>
           The next-generation dating app built for authenticity, safety, and real human energy.
-          Choose <span className="text-white font-medium">Blind Mode</span> for slow discovery or
-          <span className="text-white font-medium"> Open Mode</span> for instant chemistry.
+          Choose <span style={gradientText}>Blind Mode</span> for slow discovery or
+          <span style={gradientText}> Open Mode</span> for instant chemistry.
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex items-center justify-center gap-4 mb-16">
+        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '4rem' }}>
           <Link
             href="/feed"
-            className="px-6 py-3 rounded-lg bg-white text-black font-medium hover:opacity-90 transition shadow-lg shadow-cyan-400/10"
+            style={{
+              padding: '0.75rem 1.5rem',
+              borderRadius: '0.5rem',
+              background: 'linear-gradient(90deg, #936d14, #ffffff)',
+              color: 'black',
+              fontWeight: 500,
+              textDecoration: 'none',
+              boxShadow: '0 10px 15px -3px rgba(255,217,91,0.3)',
+              transition: 'opacity 0.2s',
+            }}
           >
             Start Exploring →
           </Link>
-          <Link
-            href="/admin/login"
-            className="px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white hover:bg-white/20 transition"
-          >
-            Admin Login
-          </Link>
         </div>
 
-        {/* Feature Highlights */}
-        <div className="grid sm:grid-cols-3 gap-6 mt-8">
-          <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-            <h3 className="font-medium text-lg mb-2">🔥 Blind Mode</h3>
-            <p className="text-white/70 text-sm">Build connection before visuals. Reveal gradually.</p>
-          </div>
-          <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-            <h3 className="font-medium text-lg mb-2">🛡️ Guardian AI</h3>
-            <p className="text-white/70 text-sm">Safety checks + smart nudges inside chat.</p>
-          </div>
-          <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-            <h3 className="font-medium text-lg mb-2">🎉 Match Energy</h3>
-            <p className="text-white/70 text-sm">Confetti pops + Lottie flows that feel alive.</p>
-          </div>
+        <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+          {[
+            { title: 'Blind Mode', desc: 'Build connection before visuals. Reveal gradually.' },
+            { title: 'Guardian AI', desc: 'Safety checks + smart nudges inside chat.' },
+            { title: 'Match Energy', desc: 'Confetti pops + Lottie flows that feel alive.' },
+          ].map((card, i) => (
+            <div
+              key={i}
+              style={{
+                padding: '1.25rem',
+                borderRadius: '0.75rem',
+                background: 'rgba(0,0,0,0.3)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                textAlign: 'center',
+                minWidth: '200px',
+              }}
+            >
+              <h3 style={{ fontWeight: 500, fontSize: '1.125rem', marginBottom: '0.5rem', ...gradientText }}>
+                {card.title}
+              </h3>
+              <p style={{ color: 'rgba(240,244,248,0.7)', fontSize: '0.875rem' }}>{card.desc}</p>
+            </div>
+          ))}
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="text-center text-white/50 text-sm py-8 border-t border-white/10">
+      <footer style={{ textAlign: 'center', color: 'rgba(240,244,248,0.5)', fontSize: '0.875rem', padding: '2rem 0', borderTop: '1px solid rgba(255,255,255,0.1)', width: '100%' }}>
         Made with ❤️ by Team Lyra — Student Launch Edition
       </footer>
     </div>
   );
 }
-

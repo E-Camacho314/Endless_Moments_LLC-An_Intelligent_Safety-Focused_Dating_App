@@ -1,67 +1,137 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import React from 'react';
 
 const tabs = [
-  { href: '/', label: 'Home' },
   { href: '/feed', label: 'Discover' },
-  { href: '/chat', label: 'Chat' },
+  { href: '/chat', label: 'Chats' },
+  { href: '/events', label: 'Events' },
   { href: '/reports', label: 'Safety' },
   { href: '/metrics', label: 'Metrics' },
   { href: '/admin/moderation', label: 'Admin' },
 ];
 
+const gradientText: React.CSSProperties = {
+  background: 'linear-gradient(90deg, #936d14, #ffffff)',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+};
+
 export default function NavBar() {
   const pathname = usePathname();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const router = useRouter();
+
+  const headerStyle: React.CSSProperties = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    background: '#0a0a33',
+    padding: '12px 24px',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    zIndex: 50,
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
+  };
+
+  const logoNavStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '24px',
+  };
+
+  const logoStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+  };
+
+  const navStyle: React.CSSProperties = {
+    display: 'flex',
+    gap: '16px',
+  };
+
+  const navLinkStyle: React.CSSProperties = {
+    textDecoration: 'none',
+    padding: '6px 12px',
+    borderRadius: '4px',
+    color: 'white',
+    transition: 'background 0.2s ease',
+  };
+
+  const navLinkActiveStyle: React.CSSProperties = {
+    ...navLinkStyle,
+    backgroundColor: '#290f5a',
+  };
+
+  const rightButtonsStyle: React.CSSProperties = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+  };
+
+  const buttonStyle: React.CSSProperties = {
+    padding: '6px 12px',
+    border: '1px solid black',
+    borderRadius: '4px',
+    background: 'linear-gradient(90deg, #936d14, #ffffff)',
+    color: '#290f5a',
+    fontWeight: 600,
+    cursor: 'pointer',
+  };
+
+  const userCircleStyle: React.CSSProperties = {
+    width: '28px',
+    height: '28px',
+    borderRadius: '50%',
+    backgroundColor: 'black',
+    color: 'white',
+    display: 'grid',
+    placeItems: 'center',
+    fontSize: '10px',
+    fontWeight: 600,
+  };
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur bg-black/50 border-b border-white/10">
-      <div className="mx-auto max-w-6xl px-4 py-3 flex items-center gap-4">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-cyan-400 to-fuchsia-500" />
-          <span className="text-white font-semibold tracking-wide">Lyra</span>
-        </Link>
+    <header style={headerStyle}>
+      {/* Left: Logo + Nav */}
+      <div style={logoNavStyle}>
+        <div style={logoStyle}>
+          <div style={{ width: 40, height: 40, backgroundColor: 'black', borderRadius: '6px' }} />
+          <span style={{ fontWeight: 600, fontSize: '18px', ...gradientText }} onClick={() => router.push('/')} >Lyra</span>
+        </div>
 
-        <nav className="hidden md:flex items-center gap-1 ml-4">
+        <nav style={navStyle}>
           {tabs.map((t) => {
-            const active = pathname === t.href || (t.href !== '/' && pathname?.startsWith(t.href));
+            const isActive =
+              pathname === t.href || (t.href !== '/' && pathname?.startsWith(t.href));
             return (
               <Link
                 key={t.href}
                 href={t.href}
-                className={`px-3 py-2 rounded-md text-sm transition
-                  ${active
-                    ? 'text-white bg-white/10'
-                    : 'text-white/70 hover:text-white hover:bg-white/10'}`}
+                style={isActive ? { ...navLinkActiveStyle, ...gradientText } : { ...navLinkStyle, ...gradientText }}
               >
                 {t.label}
               </Link>
             );
           })}
         </nav>
+      </div>
 
-        <div className="ml-auto flex items-center gap-3">
-          <button
-            className="hidden sm:inline-flex px-3 py-2 text-xs rounded-md border border-white/15 text-white/80 hover:text-white hover:border-white/30"
-            onClick={() => {
-              // dev: toggle theme token on body
-              document.documentElement.classList.toggle('lyra-dark');
-            }}
-          >
-            Toggle Theme
-          </button>
-        <div className="h-7 w-7 rounded-full bg-white/10 grid place-items-center ring-1 ring-white/20">
-               <span className="text-[10px] font-semibold text-white/80">ME</span>
-        </div>
-
-        </div>
+      {/* Right: Buttons */}
+      <div style={rightButtonsStyle}>
+        <button
+          style={buttonStyle}
+          onClick={() => router.push('/profile')}
+        >
+          Log In
+        </button>
+        <div style={userCircleStyle}>ME</div>
       </div>
     </header>
   );
 }
-
