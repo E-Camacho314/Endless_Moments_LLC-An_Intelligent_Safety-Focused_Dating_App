@@ -1,8 +1,0 @@
-/* Global reset & dark theme base */
-html, body {
-  margin-top: 35px;
-  background: linear-gradient(to bottom right, #0b0c2a, #1a1a4f, #3b2f7f);
-  color: #936d14;
-  font-family: system-ui, 'Times New Roman', Times, serif;
-  overscroll-behavior: none;
-}
