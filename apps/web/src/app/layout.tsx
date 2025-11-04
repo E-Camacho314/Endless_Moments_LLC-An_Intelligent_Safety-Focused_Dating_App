@@ -4,7 +4,7 @@ import './fonts.css';
 import './tailwind.css';
 import type { Metadata } from 'next';
 import NavBar from '@/components/NavBar'; // ✅ Keep
-// import RouteTransition from '@/components/RouteTransition'; // ❌ Disable for now
+import { ThemeProvider } from '../context/ThemeContext';
 
 export const metadata: Metadata = {
   title: 'Lyra',
@@ -15,14 +15,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="bg-black text-white">
       <body className="min-h-screen">
-        {/* ✅ Global Nav */}
-        <NavBar /> 
+        <ThemeProvider>
+          {/* ✅ Global Nav */}
+          <NavBar /> 
 
-        {/* ✅ Page container */}
-        <main className="mx-auto max-w-6xl px-4 py-6 pt-24">
-          {/* <RouteTransition>{children}</RouteTransition> */}
-          {children}
-        </main>
+          {/* ✅ Page container */}
+          <main className="mx-auto max-w-6xl px-4 py-6 pt-24">
+            {/* <RouteTransition>{children}</RouteTransition> */}
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

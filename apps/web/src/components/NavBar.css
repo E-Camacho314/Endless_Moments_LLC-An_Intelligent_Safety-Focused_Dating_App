@@ -1,0 +1,12 @@
+.gradient-text-gold {
+    background: linear-gradient(90deg, #936d14, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .gradient-text-blue {
+    background: linear-gradient(90deg, #1e3a8a, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  

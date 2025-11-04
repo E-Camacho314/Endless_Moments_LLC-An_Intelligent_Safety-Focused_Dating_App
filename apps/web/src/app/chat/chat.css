@@ -1,0 +1,255 @@
+/* Theme-aware variables */
+:root {
+    /* Gold theme */
+    --color-text-gold: #f0f4f8;
+    --color-bg-gold: linear-gradient(to bottom right, #0b0c2a, #1a1a4f, #3b2f7f);
+    --color-primary-gold: linear-gradient(90deg, #936d14, #ffffff);
+    --color-nudge-allowed-bg-gold: rgba(0, 255, 128, 0.1);
+    --color-nudge-allowed-border-gold: rgba(0, 255, 128, 0.3);
+    --color-nudge-allowed-text-gold: #00ff80;
+    --color-nudge-blocked-bg-gold: rgba(255, 191, 0, 0.1);
+    --color-nudge-blocked-border-gold: rgba(255, 191, 0, 0.3);
+    --color-nudge-blocked-text-gold: #ffbf00;
+  
+    /* Blue theme */
+    --color-text-blue: #003366;
+    --color-bg-blue: linear-gradient(to bottom right, #ffffff, #99ccff);;
+    --color-primary-blue: linear-gradient(90deg, #93c5fd, #3b82f6);
+    --color-nudge-allowed-bg-blue: rgba(51, 204, 255, 0.1);
+    --color-nudge-allowed-border-blue: rgba(51, 204, 255, 0.3);
+    --color-nudge-allowed-text-blue: #33ccff;
+    --color-nudge-blocked-bg-blue: rgba(255, 85, 85, 0.1);
+    --color-nudge-blocked-border-blue: rgba(255, 85, 85, 0.3);
+    --color-nudge-blocked-text-blue: #ff5555;
+  }
+  
+  /* Base Chat Demo */
+  .chat-demo {
+    min-height: 100vh;
+    padding-top: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+  }
+  
+  .chat-nudge { 
+    padding: 0.75rem 1rem; 
+    border-radius: 0.75rem; 
+    font-size: 0.9rem; 
+  }
+  /* Gold variant */
+  .chat-demo.gold {
+    background: var(--color-bg-gold);
+    color: var(--color-text-gold);
+  }
+  
+  .chat-demo.gold .chat-title {
+    background: var(--color-primary-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .chat-demo.gold .chat-nudge.allowed {
+    background-color: var(--color-nudge-allowed-bg-gold);
+    border: 1px solid var(--color-nudge-allowed-border-gold);
+    color: var(--color-nudge-allowed-text-gold);
+  }
+  
+  .chat-demo.gold .chat-nudge.blocked {
+    background-color: var(--color-nudge-blocked-bg-gold);
+    border: 1px solid var(--color-nudge-blocked-border-gold);
+    color: var(--color-nudge-blocked-text-gold);
+  }
+  
+  .chat-demo.gold .btn-send {
+    background: var(--color-primary-gold);
+    color: black;
+  }
+  
+  /* Blue variant */
+  .chat-demo.blue {
+    background: var(--color-bg-blue);
+    color: var(--color-text-blue);
+  }
+  
+  .chat-demo.blue .chat-title {
+    background: var(--color-primary-blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .chat-demo.blue .chat-nudge.allowed {
+    background-color: var(--color-nudge-allowed-bg-blue);
+    border: 1px solid var(--color-nudge-allowed-border-blue);
+    color: var(--color-nudge-allowed-text-blue);
+  }
+  
+  .chat-demo.blue .chat-nudge.blocked {
+    background-color: var(--color-nudge-blocked-bg-blue);
+    border: 1px solid var(--color-nudge-blocked-border-blue);
+    color: var(--color-nudge-blocked-text-blue);
+  }
+  
+  .chat-demo.blue .btn-send {
+    background: var(--color-primary-blue);
+    color: black;
+  }
+  
+  /* Main container */
+  .chat-main {
+    max-width: 800px;
+    margin: 2rem auto 0 auto;
+    padding: 0 1rem;
+    text-align: center;
+  }
+  
+  /* Description text */
+  .chat-description {
+    color: rgba(240, 244, 248, 0.8);
+    margin-bottom: 2rem;
+    transition: color 0.3s;
+  }
+  
+  .chat-demo.blue .chat-description {
+    color: #003366;
+  }
+  
+  /* Chat box */
+  .chat-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    margin-bottom: 2rem;
+  }
+  
+  /* Textarea */
+  .chat-input {
+    width: 100%;
+    height: 100px;
+    padding: 0.75rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.4);
+    color: inherit;
+    outline: none;
+    resize: none;
+  }
+  
+  /* Chat buttons */
+  .chat-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .btn-send { 
+    padding: 0.5rem 1rem; 
+    border-radius: 0.75rem; 
+    background: var(--color-primary); 
+    color: black; 
+    font-weight: 500; 
+    cursor: pointer; 
+    border: none; 
+  }
+  
+  .btn-clear {
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+  
+  /* Report section */
+  .report-user {
+    margin-top: 1rem;
+    position: relative;
+  }
+  
+  .btn-report {
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 0, 0, 0.1);
+    color: #ff5555;
+    cursor: pointer;
+  }
+  
+  .report-confirm {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 0.75rem;
+  }
+  
+  .btn-report-yes {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff5555;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-report-cancel {
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: inherit;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Report sent toast */
+  .report-sent {
+    position: absolute;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: inherit;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Footer info */
+  .chat-footer-info {
+    font-size: 0.75rem;
+    color: rgba(240, 244, 248, 0.5);
+    margin-top: 1rem;
+  }
+  
+  /* Back link */
+  .back-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: inherit;
+    text-decoration: underline;
+    font-size: 0.9rem;
+  }
+  
+  /* Page footer */
+  .chat-footer {
+    text-align: center;
+    color: rgba(240, 244, 248, 0.5);
+    font-size: 0.875rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    margin-top: 4rem;
+  }
+  
