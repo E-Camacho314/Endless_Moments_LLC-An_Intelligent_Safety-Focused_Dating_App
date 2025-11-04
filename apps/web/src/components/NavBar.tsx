@@ -124,9 +124,8 @@ export default function NavBar() {
           })}
         </nav>
       </div>
-
-      {/* Right: Buttons */}
-      <div style={rightButtonsStyle}>
+   {/* Right: Buttons */}
+   <div style={rightButtonsStyle}>
         <button
           style={buttonStyle}
           onClick={() => router.push('/verify')}
@@ -143,6 +142,7 @@ export default function NavBar() {
       </div>
     </header>
   );
+   
 }
 
 
