@@ -12,11 +12,16 @@ export default function Home() {
     { title: 'Match Energy', desc: 'Confetti pops + Lottie flows that feel alive.' },
   ];
 
+  const heroImage =
+    theme === 'blue'
+      ? '/light_mode_couple.jpg'
+      : '/pexels-josh-hild-1270765-4606770.jpg';
+
   return (
     <div className="main-container">
 
       <div className="hero-img">
-        <img src="/pexels-josh-hild-1270765-4606770.jpg" alt="Night sky" />
+        <img src={heroImage} alt="Hero" />
       </div>
 
       <main style={{ maxWidth: '1200px', width: '100%' }}>
