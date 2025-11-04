@@ -112,7 +112,7 @@ export default function NavBar() {
         </button>
         <button
         style={buttonStyle}
-        onClick={() => router.push('/profile')}
+        onClick={() => router.push('/login')}
       >
         Log In
       </button>
