@@ -11,6 +11,7 @@ const tabs = [
   { href: '/reports', label: 'Safety' },
   { href: '/metrics', label: 'Metrics' },
   { href: '/admin/moderation', label: 'Admin' },
+  { href: '/verify', label: 'Verification' }, // ✅ Added verification tab
 ];
 
 const gradientText: React.CSSProperties = {
@@ -102,7 +103,9 @@ export default function NavBar() {
       <div style={logoNavStyle}>
         <div style={logoStyle}>
           <div style={{ width: 40, height: 40, backgroundColor: 'black', borderRadius: '6px' }} />
-          <span style={{ fontWeight: 600, fontSize: '18px', ...gradientText }} onClick={() => router.push('/')} >Lyra</span>
+          <span style={{ fontWeight: 600, fontSize: '18px', ...gradientText }} onClick={() => router.push('/')}>
+            Lyra
+          </span>
         </div>
 
         <nav style={navStyle}>
@@ -124,6 +127,12 @@ export default function NavBar() {
 
       {/* Right: Buttons */}
       <div style={rightButtonsStyle}>
+        <button
+          style={buttonStyle}
+          onClick={() => router.push('/verify')}
+        >
+          Verify
+        </button> {/* ✅ Added Verification button */}
         <button
           style={buttonStyle}
           onClick={() => router.push('/profile')}
