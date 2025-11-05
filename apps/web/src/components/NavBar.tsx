@@ -3,6 +3,8 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
+import { useTheme } from '../context/ThemeContext';
+import './NavBar.css';
 
 const tabs = [
   { href: '/feed', label: 'Discover' },
@@ -14,92 +16,87 @@ const tabs = [
   { href: '/verify', label: 'Verification' },
 ];
 
-const gradientText: React.CSSProperties = {
-  background: 'linear-gradient(90deg, #936d14, #ffffff)',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-};
-
 export default function NavBar() {
   const pathname = usePathname();
   const router = useRouter();
+  const { theme, toggleTheme } = useTheme();
+
+  const isGold = theme === 'gold';
 
   const headerStyle: React.CSSProperties = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    background: '#0a0a33',
-    padding: '12px 32px',
+    background: isGold ? '#0a0a33' : '#e0f2ff',
+    padding: '12px 24px',
     position: 'fixed',
     top: 0,
     left: 0,
+    right: 0, // ✅ ensures it stays within the viewport
     width: '100%',
-    height: '64px',
-    zIndex: 100,
-    boxSizing: 'border-box',
-    borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-  };
+    zIndex: 50,
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
+    color: isGold ? 'white' : '#1e3a8a',
+    boxSizing: 'border-box', // ✅ keeps padding from pushing content off-screen
+    overflowX: 'auto', // ✅ allows scrolling if there are too many tabs
+  };  
 
-  const logoNavStyle: React.CSSProperties = {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '28px',
+  const buttonStyle: React.CSSProperties = {
+    padding: '4px 10px', // smaller button
+    border: 'none',
+    borderRadius: '4px',
+    background: isGold
+      ? 'linear-gradient(90deg, #936d14, #ffffff)'
+      : 'linear-gradient(90deg, #93c5fd, #3b82f6)',
+    color: isGold ? '#290f5a' : 'white',
+    fontWeight: 600,
+    cursor: 'pointer',
+    fontSize: '13px',
   };
 
   const navLinkStyle: React.CSSProperties = {
     textDecoration: 'none',
-    padding: '6px 12px',
+    padding: '4px 8px',
     borderRadius: '4px',
-    color: 'white',
-    fontSize: '15px',
-    fontWeight: 500,
-    transition: 'background 0.2s ease, color 0.2s ease',
-  };
-
-  const navLinkActiveStyle: React.CSSProperties = {
-    ...navLinkStyle,
-    backgroundColor: '#290f5a',
-  };
-
-  const buttonStyle: React.CSSProperties = {
-    padding: '10px 18px',
-    border: 'none',
-    borderRadius: '6px',
-    background: 'linear-gradient(90deg, #936d14, #ffffff)',
-    color: '#0a0a33',
-    fontWeight: 600,
-    cursor: 'pointer',
-    fontSize: '15px',
+    fontSize: '14px',
+    transition: 'background 0.2s ease',
   };
 
   return (
     <header style={headerStyle}>
-      <div style={logoNavStyle}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div
-            style={{
-              width: 36,
-              height: 36,
-              backgroundColor: 'black',
-              borderRadius: '6px',
-            }}
-          />
-          <span
-            style={{ fontWeight: 600, fontSize: '18px', ...gradientText, cursor: 'pointer' }}
-            onClick={() => router.push('/')}
-          >
-            Lyra
-          </span>
-        </div>
+      {/* Left side */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+        <span
+          className={isGold ? 'gradient-text-gold' : 'gradient-text-blue'}
+          style={{
+            fontSize: '18px',
+            fontWeight: 700,
+            cursor: 'pointer',
+            lineHeight: '1',
+          }}
+          onClick={() => router.push('/')}
+        >
+          Lyra
+        </span>
 
-        <nav style={{ display: 'flex', gap: '18px' }}>
+        <nav style={{ display: 'flex', gap: '10px' }}>
           {tabs.map((t) => {
-            const isActive = pathname === t.href || pathname?.startsWith(t.href);
+            const isActive =
+              pathname === t.href || (t.href !== '/' && pathname?.startsWith(t.href));
             return (
               <Link
                 key={t.href}
                 href={t.href}
-                style={isActive ? { ...navLinkActiveStyle, ...gradientText } : { ...navLinkStyle, ...gradientText }}
+                className={isGold ? 'gradient-text-gold' : 'gradient-text-blue'}
+                style={{
+                  ...navLinkStyle,
+                  backgroundColor: isActive
+                    ? isGold
+                      ? '#290f5a'
+                      : '#bfdbfe'
+                    : 'transparent',
+                }}
               >
                 {t.label}
               </Link>
@@ -108,14 +105,17 @@ export default function NavBar() {
         </nav>
       </div>
 
-      {/* Log In / Sign Up button - aligned perfectly */}
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        <button
-          style={buttonStyle}
-          onClick={() => router.push('/login')}
-        >
-          Log In / Sign Up
+      {/* Right side */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        <button style={buttonStyle} onClick={toggleTheme}>
+          Switch Theme
         </button>
+        <button
+        style={buttonStyle}
+        onClick={() => router.push('/login')}
+      >
+        Log In
+      </button>
       </div>
     </header>
   );
