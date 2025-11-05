@@ -2,10 +2,12 @@
 
 import React from 'react';
 import { useTheme } from '@/context/ThemeContext';
+import { useRouter } from 'next/navigation';
 import './ProfilePage.css';
 
 export default function ProfilePage() {
   const { theme } = useTheme();
+  const router = useRouter();
 
   const profileDetails = [
     { label: 'Age', value: '27' },
@@ -36,6 +38,42 @@ export default function ProfilePage() {
           <p className="profile-description">
             “Building technology that connects people meaningfully. Traveler, pianist, and cat dad.”
           </p>
+          <div style={{ marginTop: 12 }}>
+            <button
+              className="login-btn"
+              style={{
+                padding: '4px 10px',
+                border: 'none',
+                borderRadius: '4px',
+                background:
+                  theme === 'gold'
+                    ? 'linear-gradient(90deg, #936d14, #ffffff)'
+                    : 'linear-gradient(90deg, #93c5fd, #3b82f6)',
+                color: theme === 'gold' ? '#290f5a' : 'white',
+                fontWeight: 600,
+                cursor: 'pointer',
+                fontSize: '13px',
+              }}
+              onClick={() => {
+                // Clear all login state
+                localStorage.removeItem('currentUserId');
+                localStorage.removeItem('currentUserName');
+                localStorage.removeItem('currentUserAvatar');
+                
+                // Notify ALL tabs about the logout
+                window.dispatchEvent(new Event('lyra:user:update'));
+                window.dispatchEvent(new StorageEvent('storage', {
+                  key: 'currentUserId',
+                  oldValue: '999',
+                  newValue: null
+                }));
+                
+                router.push('/');
+              }}
+            >
+              Log Out
+            </button>
+          </div>
         </div>
 
         <div className="profile-details-grid">

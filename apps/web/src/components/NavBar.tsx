@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import './NavBar.css';
 
@@ -20,6 +20,40 @@ export default function NavBar() {
   const pathname = usePathname();
   const router = useRouter();
   const { theme, toggleTheme } = useTheme();
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null);
+  const [currentUserName, setCurrentUserName] = useState<string | null>(null);
+  const [currentUserAvatar, setCurrentUserAvatar] = useState<string | null>(null);
+
+  useEffect(() => {
+    const readUserState = () => {
+      try {
+        const raw = localStorage.getItem('currentUserId');
+        const name = localStorage.getItem('currentUserName');
+        const avatar = localStorage.getItem('currentUserAvatar');
+        setCurrentUserId(raw ? Number(raw) : null);
+        setCurrentUserName(name ?? null);
+        setCurrentUserAvatar(avatar ?? null);
+      } catch (e) {
+        // ignore in SSR or unusual environments
+      }
+    };
+
+    // Read initial state
+    readUserState();
+
+    // Set up listeners for changes
+    if (typeof window !== 'undefined') {
+      window.addEventListener('lyra:user:update', readUserState);
+      window.addEventListener('storage', readUserState);
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('lyra:user:update', readUserState);
+        window.removeEventListener('storage', readUserState);
+      }
+    };
+  }, [pathname]); // Re-run when pathname changes to ensure state is fresh
 
   const isGold = theme === 'gold';
 
@@ -107,15 +141,40 @@ export default function NavBar() {
 
       {/* Right side */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <button style={buttonStyle} onClick={toggleTheme}>
+        <button type="button" style={buttonStyle} onClick={toggleTheme}>
           Switch Theme
         </button>
-        <button
-        style={buttonStyle}
-        onClick={() => router.push('/login')}
-      >
-        Log In
-      </button>
+        {currentUserId ? (
+          <Link href="/profile" style={{ textDecoration: 'none' }}>
+            <div
+              role="button"
+              tabIndex={0}
+              style={{
+                ...buttonStyle,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                padding: '6px 10px',
+                cursor: 'pointer',
+              }}
+            >
+              <img
+                src={currentUserAvatar ?? '/default-avatar.png'}
+                alt="avatar"
+                style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }}
+              />
+              <span style={{ fontWeight: 700 }}>
+                {currentUserName ? `Hi! ${currentUserName}` : 'Profile'}
+              </span>
+            </div>
+          </Link>
+        ) : (
+          <Link href="/login" style={{ textDecoration: 'none' }}>
+            <div style={{ ...buttonStyle, cursor: 'pointer' }} role="button" tabIndex={0}>
+              Log In
+            </div>
+          </Link>
+        )}
       </div>
     </header>
   );

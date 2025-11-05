@@ -1,0 +1,206 @@
+
+.pm-card-wrapper {
+  position: relative;
+  width: 420px;
+  max-width: 90vw;
+  height: 560px;
+  touch-action: none;
+  transition: height 800ms cubic-bezier(0.4, 0.2, 0.2, 1), margin-top 800ms cubic-bezier(0.4, 0.2, 0.2, 1), transform 800ms cubic-bezier(0.4, 0.2, 0.2, 1);
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 1;
+}
+
+
+.pm-card-wrapper.expanded {
+  height: 700px;
+  max-height: 700px;
+  margin-top: 48px;
+  z-index: 100;
+  transform: scale(1.03);
+}
+
+/* Hide non-expanded cards when any card is expanded */
+.deck-container.expanded .pm-card-wrapper:not(.expanded) {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+.profile-card {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: height 800ms cubic-bezier(0.4, 0.2, 0.2, 1), opacity 500ms cubic-bezier(0.4, 0.2, 0.2, 1), transform 800ms cubic-bezier(0.4, 0.2, 0.2, 1);
+  height: 100%;
+  min-height: 560px;
+}
+
+
+.profile-card.expanded {
+  min-height: 700px;
+  height: 100%;
+  z-index: 20;
+  transform: scale(1.02);
+}
+
+/* when wrapper is expanded, make it taller to accommodate extra details */
+.pm-card-wrapper.expanded {
+  height: 560px;
+  max-height: 700px;
+  margin-top: 48px;
+}
+
+/* ensure the age dot/age text is visible and not affected by any gradient */
+.profile-card h3 .age {
+  color: #0b0b0b !important;
+  background: none !important;
+  background-image: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  padding-left: 6px;
+  font-weight: 600;
+}
+
+.image-wrap {
+  height: 55%;
+  background: #eee;
+  position: relative;
+}
+
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-image.blurred {
+  filter: blur(18px) brightness(0.8);
+  transition: filter 0.3s;
+}
+
+/* black text for all card content */
+.profile-card,
+.profile-card *,
+.profile-card button,
+.profile-card span,
+.profile-card p,
+.profile-card h3,
+.profile-card h4 {
+  color: black !important;
+  -webkit-text-fill-color: black !important;
+}
+
+/* Ensure buttons maintain black text even with gradient backgrounds */
+.profile-card button {
+  text-shadow: none !important;
+  background-clip: unset !important;
+  -webkit-background-clip: unset !important;
+}
+
+.carousel-controls {
+  position: absolute;
+  inset: auto 8px 8px 8px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.carousel button.carousel {
+  background: rgba(255,255,255,0.85);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.card-body {
+  padding: 14px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.action {
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.action.pass {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.action.like {
+  background: linear-gradient(90deg,#ff7a7a,#ff4d94);
+}
+
+.view-more {
+  background: transparent;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.expanded-details {
+  margin-top: 8px;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: #eef2ff;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.bio {
+  margin-top: 6px;
+}
+
+/* stacked deck styles when multiple cards placed absolutely */
+.deck-container {
+  width: 460px;
+  max-width: 100%;
+  height: 560px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.deck-container > .card-slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deck-container > .card-slot .pm-card-wrapper {
+  transition: transform 220ms ease, opacity 220ms ease;
+}
