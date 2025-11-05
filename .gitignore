@@ -28,3 +28,6 @@ Thumbs.db
 node_modules/
 .next/
 backend/app/client_secret.json
+# Google OAuth secrets
+backend/app/client_secret.json
+backend/.env
