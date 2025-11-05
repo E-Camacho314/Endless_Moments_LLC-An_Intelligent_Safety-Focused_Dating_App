@@ -38,7 +38,26 @@ export default function ProfilePage() {
           <p className="profile-description">
             “Building technology that connects people meaningfully. Traveler, pianist, and cat dad.”
           </p>
-          <div style={{ marginTop: 12 }}>
+          <div style={{ marginTop: 12, display: 'flex', gap: '8px' }}>
+  <button
+    className="login-btn"
+    style={{
+      padding: '4px 10px',
+      border: 'none',
+      borderRadius: '4px',
+      background:
+        theme === 'gold'
+          ? 'linear-gradient(90deg, #936d14, #ffffff)'
+          : 'linear-gradient(90deg, #93c5fd, #3b82f6)',
+      color: theme === 'gold' ? '#290f5a' : 'white',
+      fontWeight: 600,
+      cursor: 'pointer',
+      fontSize: '13px',
+    }}
+    onClick={() => router.push('/profile/edit')}
+  >
+    Edit Profile
+  </button>
             <button
               className="login-btn"
               style={{
