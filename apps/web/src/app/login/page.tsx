@@ -9,29 +9,23 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
+  const { theme } = useTheme();
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
     console.log('Logging in with:', { email, password });
+    // Temporary redirect after manual login
+    router.push('/profile');
   };
 
   const handleGoogleSignIn = () => {
-    // Handle Google sign-in
-    console.log('Sign in with Google');
-  };
-
-  const handleAppleSignIn = () => {
-    // Handle Apple sign-in
-    console.log('Sign in with Apple');
+    // Redirect to backend Google OAuth
+    window.location.href = 'http://127.0.0.1:8000/auth/google';
   };
 
   const handleCreateAccount = () => {
-    // Redirect or open signup page
-    console.log('Go to signup page');
+    router.push('/signup');
   };
-
-  const { theme } = useTheme();
 
   return (
     <div className={`login-container ${theme}`}>
@@ -56,13 +50,9 @@ export default function LoginPage() {
             required
           />
 
-            <button
-            type="button"
-            className="login-btn"
-            onClick={() => router.push('/profile')}
-            >
+          <button type="submit" className="login-btn">
             Log In
-            </button>
+          </button>
         </form>
 
         <div className="divider">or</div>
@@ -70,18 +60,14 @@ export default function LoginPage() {
         <div className="social-login">
           <button onClick={handleGoogleSignIn} className="google-btn">
             <img src="/icons/google.svg" alt="Google" />
-            Sign in with Google
-          </button>
-
-          <button onClick={handleAppleSignIn} className="apple-btn">
-            <img src="/icons/apple.svg" alt="Apple" />
-            Sign in with Apple
+            Continue with Google
           </button>
         </div>
 
-        <button onClick={handleCreateAccount} className="signup-link">
-          Don’t have an account? <span>Create one</span>
-        </button>
+        <p className="signup-link">
+          Don’t have an account?{' '}
+          <span onClick={handleCreateAccount}>Create one</span>
+        </p>
       </div>
     </div>
   );

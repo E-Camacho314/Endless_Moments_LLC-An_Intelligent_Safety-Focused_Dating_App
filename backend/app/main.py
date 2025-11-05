@@ -18,6 +18,7 @@ from .features.verify_id import router as verify_router
 from .features.payments import router as payments_router
 from .features import feed
 from .routers import verification
+from app.routers import auth
 
 
 app = FastAPI(title="Lyra API")
@@ -42,3 +43,5 @@ app.include_router(verify_router)
 app.include_router(payments_router)
 app.include_router(feed.router)
 app.include_router(verification.router)
+app.include_router(auth.router)
+
