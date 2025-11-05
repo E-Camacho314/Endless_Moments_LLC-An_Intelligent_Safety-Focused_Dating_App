@@ -1,79 +1,119 @@
-"use client";
-import { useState } from "react";
+'use client';
 
-export default function VerificationPage() {
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function VerifyPage() {
+  const [image, setImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string | null>(null);
-  const [status, setStatus] = useState("");
+  const router = useRouter();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selected = e.target.files?.[0];
-    if (selected) {
-      setFile(selected);
-      setPreview(URL.createObjectURL(selected));
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      setImage(URL.createObjectURL(selectedFile));
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!file) {
-      setStatus("Please upload a file before submitting.");
+      alert('Please upload a picture first.');
       return;
     }
 
-    const formData = new FormData();
-    formData.append("file", file);
-
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/verification/submit`, {
-        method: "POST",
-        body: formData,
-      });
-      const data = await res.json();
-      if (data.ok) {
-        setStatus("✅ Verification placeholder submitted successfully!");
-      } else {
-        setStatus("⚠️ Failed to submit verification.");
-      }
-    } catch (err) {
-      console.error(err);
-      setStatus("❌ Server error while submitting verification.");
-    }
+    // ✅ Simulate upload success (you can connect to backend later)
+    setTimeout(() => {
+      router.push('/verify/success');
+    }, 1000);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-2xl shadow-lg w-96 text-center">
-        <h1 className="text-2xl font-bold mb-4 text-gray-800">Identity Verification</h1>
-        <p className="text-gray-600 mb-6">
-          Upload a selfie or ID to complete your profile verification.
-        </p>
+    <div
+      style={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(to bottom right, #0b0c2a, #1a1a4f, #3b2f7f)',
+        color: '#fff',
+        padding: '2rem',
+      }}
+    >
+      <h1 style={{ fontSize: '2rem', marginBottom: '1.5rem', fontWeight: 600 }}>
+        Identity Verification
+      </h1>
 
-        {preview && (
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          background: 'rgba(255,255,255,0.1)',
+          padding: '2rem',
+          borderRadius: '1rem',
+          boxShadow: '0 4px 20px rgba(0,0,0,0.4)',
+          width: '90%',
+          maxWidth: '400px',
+        }}
+      >
+        <label
+          htmlFor="file"
+          style={{
+            fontSize: '1rem',
+            fontWeight: 500,
+            marginBottom: '1rem',
+            cursor: 'pointer',
+          }}
+        >
+          Upload a Selfie or ID
+        </label>
+
+        <input
+          id="file"
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          style={{ marginBottom: '1rem' }}
+        />
+
+        {image && (
           <img
-            src={preview}
+            src={image}
             alt="Preview"
-            className="mx-auto mb-4 w-40 h-40 object-cover rounded-full border"
+            style={{
+              width: '180px',
+              height: '180px',
+              borderRadius: '12px',
+              objectFit: 'cover',
+              marginBottom: '1rem',
+              border: '2px solid rgba(255,255,255,0.3)',
+            }}
           />
         )}
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            className="block w-full text-sm text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none mb-4"
-          />
-          <button
-            type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition"
-          >
-            Submit Verification
-          </button>
-        </form>
-
-        {status && <p className="mt-4 text-sm text-gray-700">{status}</p>}
-      </div>
+        <button
+          type="submit"
+          style={{
+            padding: '10px 20px',
+            borderRadius: '6px',
+            border: 'none',
+            background: 'linear-gradient(90deg, #936d14, #ffffff)',
+            color: '#290f5a',
+            fontWeight: 600,
+            cursor: 'pointer',
+            transition: 'transform 0.2s ease',
+          }}
+          onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+          onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+        >
+          Submit
+        </button>
+      </form>
     </div>
   );
 }
