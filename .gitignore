@@ -27,3 +27,4 @@ Thumbs.db
 
 node_modules/
 .next/
+backend/app/client_secret.json
