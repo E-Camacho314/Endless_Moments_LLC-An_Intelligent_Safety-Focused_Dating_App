@@ -82,10 +82,10 @@ export default function LoginPage() {
           </button>
         </div>
 
-        <p className="signup-link">
-          Don’t have an account?{' '}
-          <span onClick={handleCreateAccount}>Create one</span>
-        </p>
+        <button onClick={() => router.push('/signup')} className="signup-link">
+  Don’t have an account? <span>Create one</span>
+</button>
+
       </div>
     </div>
   );

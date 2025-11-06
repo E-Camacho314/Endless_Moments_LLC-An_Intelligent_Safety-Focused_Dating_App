@@ -80,3 +80,4 @@ def google_callback(request: Request):
     except Exception as e:
         print("❌ Error in Google Callback:", str(e))
         return {"error": str(e)}
+        
