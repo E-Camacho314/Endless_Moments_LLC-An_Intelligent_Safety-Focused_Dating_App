@@ -5,6 +5,7 @@ Quick Start:
    cd backend
    pip install -r requirements.txt
    export DATABASE_URL=sqlite:///./lyra.db
+   export OAUTHLIB_INSECURE_TRANSPORT=1  
    uvicorn app.main:app --reload --port 8000
    python -c "from app.seed import run; run()"
 
