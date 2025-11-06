@@ -1,0 +1,90 @@
+.profile-setup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at center, #0a0a33, #000020);
+  color: white;
+  padding: 40px;
+}
+
+.profile-setup-box {
+  background: rgba(20, 20, 60, 0.95);
+  padding: 40px;
+  border-radius: 16px;
+  width: 600px;
+  text-align: left;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.08);
+}
+
+.profile-setup-box h1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #f3c76b, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.profile-setup-box p {
+  color: #d1d5db;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 15px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #f3c76b;
+  margin-bottom: 6px;
+}
+
+.profile-form input,
+.profile-form select,
+.profile-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #18184a;
+  color: white;
+  font-size: 15px;
+  transition: all 0.2s ease;
+}
+
+.profile-form input:focus,
+.profile-form select:focus,
+.profile-form textarea:focus {
+  border-color: #f3c76b;
+  box-shadow: 0 0 8px #f3c76b50;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.submit-btn {
+  background: linear-gradient(90deg, #f3c76b, #ffffff);
+  color: #290f5a;
+  font-weight: 700;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  margin-top: 25px;
+  font-size: 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.submit-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 10px #f3c76b90;
+}
