@@ -75,6 +75,7 @@ export default function ProfileSetupPage() {
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Other">Other / Prefer not to say</option>
+                  required
             </select>
           </div>
 
@@ -84,11 +85,13 @@ export default function ProfileSetupPage() {
               name="preferredGender"
               value={profile.preferredGender}
               onChange={handleChange}
+              required
             >
               <option value="">Select Preferred Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
               <option value="Any">Any</option>
+              required
             </select>
           </div>
 
@@ -110,6 +113,7 @@ export default function ProfileSetupPage() {
               placeholder="e.g., 175"
               value={profile.height}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -121,6 +125,7 @@ export default function ProfileSetupPage() {
               placeholder="Enter your city or country"
               value={profile.location}
               onChange={handleChange}
+              required
             />
           </div>
 
@@ -135,7 +140,9 @@ export default function ProfileSetupPage() {
               <option value="Tech">Technology</option>
               <option value="Travel">Travel</option>
               <option value="Cooking">Cooking</option>
+          
             </select>
+            required
           </div>
 
           {/* Children / Looking For */}

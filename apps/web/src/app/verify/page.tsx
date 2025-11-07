@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 export default function VerifyPage() {
   const [image, setImage] = useState<string | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const router = useRouter();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -24,10 +25,36 @@ export default function VerifyPage() {
       return;
     }
 
-    // ✅ Simulate upload success (you can connect to backend later)
-    setTimeout(() => {
-      router.push('/verify/success');
-    }, 1000);
+    try {
+      setIsSubmitting(true);
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const apiBase = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:8000';
+      const response = await fetch(`${apiBase}/verification/submit`, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        router.push('/verify/error?reason=Verification%20failed.%20Please%20try%20again.');
+        return;
+      }
+
+      const data: { status?: string; reason?: string } = await response.json();
+      console.log("✅ Verification API response:", data);
+
+      if (data.status === 'verified') {
+        router.push('/verify/success');
+      } else {
+        const reason = data.reason ? encodeURIComponent(data.reason) : encodeURIComponent('We could not verify this photo.');
+        router.push(`/verify/error?reason=${reason}`);
+      }
+    } catch (error) {
+      router.push('/verify/error?reason=Unexpected%20error.%20Please%20retry.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -110,6 +137,7 @@ export default function VerifyPage() {
           }}
           onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
           onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+          disabled={isSubmitting}
         >
           Submit
         </button>
