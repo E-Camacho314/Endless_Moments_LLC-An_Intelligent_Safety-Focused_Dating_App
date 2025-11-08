@@ -3,6 +3,7 @@ from sqlalchemy import Integer, String, Boolean, DateTime, ForeignKey, Text
 from datetime import datetime
 from .database import Base
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Boolean, Text
+from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from datetime import datetime
 from .database import Base
@@ -108,3 +109,12 @@ class Event(Base):
     title: Mapped[str] = mapped_column(String(200))
     starts_at: Mapped[datetime] = mapped_column(DateTime)
     location: Mapped[str] = mapped_column(String(200))
+
+class Notification(Base):
+    __tablename__ = "notifications"
+    id = Column(Integer, ForeignKey('users.id'), index=True, nullable=True)
+    user_id = Column(Integer, index=True)
+    type = Column(String, index=True)
+    content = Column(String)
+    timestamp = Column(DateTime, default=func.now(), index=True)
+    is_read = Column(Boolean, default=False)
