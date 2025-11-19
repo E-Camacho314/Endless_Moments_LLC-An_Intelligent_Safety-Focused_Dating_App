@@ -1,0 +1,113 @@
+/* Footer.css */
+
+.footer {
+    background-color: var(--footer-bg);
+    color: var(--footer-text);
+    padding: 2.5rem 1rem;
+    font-family: system-ui, sans-serif;
+}
+
+/* Top section - horizontal columns */
+.topSection {
+    overflow-x: auto;
+    border-bottom: 1px solid var(--footer-border);
+    padding-bottom: 2rem;
+}
+
+.columns {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    min-width: max-content;
+}
+
+.column {
+    flex-shrink: 0;
+    width: 16rem;
+}
+
+.heading {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* App download section */
+.appSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--footer-border);
+    padding-bottom: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .appSection {
+        flex-direction: row;
+    }
+}
+
+.appHeading {
+    font-weight: 600;
+    font-size: 1.125rem;
+}
+
+.appLinks {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Bottom section */
+.bottomSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    color: var(--footer-subtext);
+    font-size: 0.875rem;
+    gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    .bottomSection {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.bottomLinks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.footer a {
+    color: var(--footer-subtext);
+    text-decoration: none;
+  }
+  
+  .footer a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+  
+.gradient-text-gold {
+    background: linear-gradient(90deg, #936d14, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .gradient-text-blue {
+    background: linear-gradient(90deg, #93c5fd, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  

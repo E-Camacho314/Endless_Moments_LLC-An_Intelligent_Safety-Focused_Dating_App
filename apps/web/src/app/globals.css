@@ -24,6 +24,10 @@ body.blue-theme {
   --highlight-gradient: linear-gradient(90deg, #3b82f6, #93c5fd);
 }
 
+html, body {
+  overscroll-behavior: none;
+}
+
 body {
   padding-top: var(--top-padding);
   margin: 0;

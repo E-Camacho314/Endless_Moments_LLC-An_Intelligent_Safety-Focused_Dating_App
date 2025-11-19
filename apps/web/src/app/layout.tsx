@@ -4,6 +4,7 @@ import './fonts.css';
 import './tailwind.css';
 import type { Metadata } from 'next';
 import NavBar from '@/components/NavBar'; // ✅ Keep
+import Footer from '@/components/Footer';
 import { ThemeProvider } from '../context/ThemeContext';
 
 export const metadata: Metadata = {
@@ -24,9 +25,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* <RouteTransition>{children}</RouteTransition> */}
             {children}
           </main>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
   );
 }
+
 

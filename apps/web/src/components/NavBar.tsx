@@ -11,9 +11,6 @@ const tabs = [
   { href: '/chat', label: 'Chats' },
   { href: '/events', label: 'Events' },
   { href: '/reports', label: 'Safety' },
-  { href: '/metrics', label: 'Metrics' },
-  { href: '/admin/moderation', label: 'Admin' },
-  { href: '/verify', label: 'Verification' },
 ];
 
 export default function NavBar() {
@@ -141,11 +138,8 @@ export default function NavBar() {
 
       {/* Right side */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <button type="button" style={buttonStyle} onClick={toggleTheme}>
-          Switch Theme
-        </button>
         {currentUserId ? (
-          <Link href="/profile" style={{ textDecoration: 'none' }}>
+          <Link href={`/profiles/${currentUserId}`} style={{ textDecoration: 'none' }}>
             <div
               role="button"
               tabIndex={0}
@@ -163,9 +157,6 @@ export default function NavBar() {
                 alt="avatar"
                 style={{ width: 28, height: 28, borderRadius: '50%', objectFit: 'cover' }}
               />
-              <span style={{ fontWeight: 700 }}>
-                {currentUserName ? `Hi! ${currentUserName}` : 'Profile'}
-              </span>
             </div>
           </Link>
         ) : (

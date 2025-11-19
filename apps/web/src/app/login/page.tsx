@@ -50,27 +50,34 @@ export default function LoginPage() {
             required
           />
 
-            <button
-              type="button"
-              className="login-btn"
-              onClick={() => {
-                // Persist a simple dev login. In production this should be set by the auth flow.
-                localStorage.setItem('currentUserId', String(999));
-                localStorage.setItem('currentUserName', 'John');
-                localStorage.setItem('currentUserAvatar', '/default-avatar.png');
-                
-                // Notify ALL tabs about the login
-                window.dispatchEvent(new Event('lyra:user:update'));
-                window.dispatchEvent(new StorageEvent('storage', {
+          <button
+            type="button"
+            className="login-btn"
+            onClick={() => {
+              // Persist a simple dev login. In production this should be set by the auth flow.
+              const userId = 999;
+              const userName = 'John';
+              const userAvatar = '/default-avatar.png';
+
+              localStorage.setItem('currentUserId', String(userId));
+              localStorage.setItem('currentUserName', userName);
+              localStorage.setItem('currentUserAvatar', userAvatar);
+
+              // Notify ALL tabs about the login
+              window.dispatchEvent(new Event('lyra:user:update'));
+              window.dispatchEvent(
+                new StorageEvent('storage', {
                   key: 'currentUserId',
-                  newValue: String(999)
-                }));
-                
-                router.push('/profile');
-              }}
-            >
-              Log In
-            </button>
+                  newValue: String(userId),
+                })
+              );
+
+              // Navigate to the user profile
+              router.push(`/profiles/${userId}`);
+            }}
+          >
+            Log In
+          </button>
         </form>
 
         <div className="divider">or</div>
