@@ -38,6 +38,14 @@ class Profile(Base):
     circle = Column(String, nullable=True)  # ✅ campus circle support
     badges = Column(String, nullable=True)  # ✅ comma list: "ID Verified,Video Verified"
     photo_url = Column(String, nullable=True)  # ✅ simple photo version
+    occupation = Column(String, nullable=True)
+    location = Column(String, nullable=True)
+    pronouns = Column(String, nullable=True)
+    gender = Column(String, nullable=True)
+    preference = Column(String, nullable=True)
+    interests = Column(String, nullable=True)
+    relationship_goals = Column(String, nullable=True)
+    member_since = Column(String, nullable=True)
 
 class Interaction(Base):
     __tablename__ = "interactions"
@@ -112,8 +120,8 @@ class Event(Base):
 
 class Notification(Base):
     __tablename__ = "notifications"
-    id = Column(Integer, ForeignKey('users.id'), index=True, nullable=True)
-    user_id = Column(Integer, index=True)
+    id = Column(Integer, primary_key=True, index=True)  # ✅ Primary key
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     type = Column(String, index=True)
     content = Column(String)
     timestamp = Column(DateTime, default=func.now(), index=True)
