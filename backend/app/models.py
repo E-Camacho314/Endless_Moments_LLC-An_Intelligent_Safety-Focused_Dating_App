@@ -120,9 +120,10 @@ class Event(Base):
 
 class Notification(Base):
     __tablename__ = "notifications"
-    id = Column(Integer, primary_key=True, index=True)  # ✅ Primary key
+    id = Column(Integer, primary_key=True, index=True) 
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     type = Column(String, index=True)
     content = Column(String)
     timestamp = Column(DateTime, default=func.now(), index=True)
     is_read = Column(Boolean, default=False)
+    

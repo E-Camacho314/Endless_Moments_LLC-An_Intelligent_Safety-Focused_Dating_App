@@ -15,6 +15,7 @@ from .features.verify_id import router as verify_router
 from .features.payments import router as payments_router
 from .features import feed
 from .routers import verification
+from .routers.notifications import router as notification_router
 from app.routers import auth
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -55,3 +56,5 @@ app.include_router(payments_router)
 app.include_router(feed.router)
 app.include_router(verification.router)  # <--- Your verification API is now REAL
 app.include_router(auth.router)
+app.include_router(notification_router)
+
